@@ -1,24 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./toggleMode.css";
 
 const ToggleMode = () => {
   // practice 2: click button to toggle bg color between dark and light
   let [isDarkMode, setIsDarkMode] = useState(false);
-
+  const practice2Ref = useRef(null);
   useEffect(() => {
-    const body = document.body;
-    if (isDarkMode) {
-      body.classList.add("dark-mode");
+    const targetElement = practice2Ref.current;
+    if(targetElement){
+      if (isDarkMode) {
+      targetElement.classList.add("dark-mode");
     } else {
-      body.classList.remove("dark-mode");
+      targetElement.classList.remove("dark-mode");
     }
+    }
+    
   }, [isDarkMode]);
 
   const handleToggle = () => {
     setIsDarkMode(!isDarkMode);
   };
   return (
-    <div className="practice2">
+    <div id="practice2" ref = {practice2Ref}>
       <button onClick={handleToggle}>
         {" "}
         {isDarkMode ? "Disable Dark Mode" : "Enable Dark Mode"}
